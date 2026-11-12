@@ -1,0 +1,83 @@
+
+@startuml
+
+class Etudiant {
+  - idEtudiant : int
+  - nom : String
+  - prenom : String
+  - matricule : String
+  - email : String
+  + consulterEmploiDuTemps()
+  + consulterPresences()
+}
+
+class Matiere {
+  - idMatiere : int
+  - code : String
+  - libelle : String
+  - description : String
+  + ajouterMatiere()
+  + modifierMatiere()
+}
+
+class GroupeTD {
+  - idGroupe : int
+  - nomGroupe : String
+  - niveau : String
+  - capacite : int
+  + ajouterEtudiant()
+  + retirerEtudiant()
+}
+
+class SeanceTD {
+  - idSeance : int
+  - date : Date
+  - heureDebut : Time
+  - heureFin : Time
+  - statut : String
+  + programmer()
+  + annuler()
+  + verifierDisponibilite()
+}
+
+class Enseignant {
+  - idEnseignant : int
+  - nom : String
+  - prenom : String
+  - email : String
+  - specialite : String
+  + consulterSeances()
+}
+
+class Salle {
+  - idSalle : int
+  - nomSalle : String
+  - capacite : int
+  - localisation : String
+  + verifierDisponibilite()
+}
+
+class Presence {
+  - idPresence : int
+  - dateEnregistrement : DateTime
+  - statut : StatutPresence
+  + enregistrerPresence()
+}
+
+enum StatutPresence {
+  PRESENT
+  ABSENT
+  RETARD
+  EXCUSE
+}
+
+Etudiant "0..*" -- "0..*" GroupeTD : appartient
+Matiere "1" -- "0..*" GroupeTD : concerne
+GroupeTD "1" -- "0..*" SeanceTD : possède
+Matiere "1" -- "0..*" SeanceTD : porte sur
+Enseignant "1" -- "0..*" SeanceTD : anime
+Salle "1" -- "0..*" SeanceTD : accueille
+SeanceTD "1" -- "0..*" Presence : contient
+Etudiant "1" -- "0..*" Presence : possède
+
+@enduml

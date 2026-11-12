@@ -1,0 +1,44 @@
+@startuml
+left to right direction
+
+actor Administrateur
+actor "Responsable pédagogique" as Responsable
+actor Enseignant
+actor Etudiant
+
+rectangle "Plateforme de gestion des TD" {
+
+  usecase "Gérer les matières" as UC1
+  usecase "Créer les groupes TD" as UC2
+  usecase "Affecter les étudiants" as UC3
+  usecase "Programmer une séance" as UC4
+  usecase "Affecter un enseignant" as UC5
+  usecase "Réserver une salle" as UC6
+  usecase "Générer automatiquement\nl'emploi du temps" as UC7
+  usecase "Vérifier les conflits" as UC8
+  usecase "Consulter le calendrier" as UC9
+  usecase "Enregistrer les présences" as UC10
+  usecase "Consulter les présences" as UC11
+  usecase "Produire le bilan" as UC12
+}
+
+Administrateur --> UC1
+Administrateur --> UC2
+Administrateur --> UC3
+
+Responsable --> UC4
+Responsable --> UC5
+Responsable --> UC6
+Responsable --> UC7
+
+UC7 .> UC8 : <<include>>
+UC4 .> UC8 : <<include>>
+
+Enseignant --> UC9
+Enseignant --> UC10
+Enseignant --> UC12
+
+Etudiant --> UC9
+Etudiant --> UC11
+
+@enduml

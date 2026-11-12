@@ -1,0 +1,55 @@
+
+@startuml
+
+start
+
+:Charger les séances à programmer;
+
+:Charger les enseignants;
+:Charger les salles;
+:Charger les créneaux;
+
+while (Existe-t-il une séance non programmée ?) is (Oui)
+
+    :Sélectionner une séance;
+
+    :Choisir un créneau;
+
+    :Chercher un enseignant;
+
+    :Chercher une salle;
+
+    if (Groupe disponible ?) then (Oui)
+
+        if (Enseignant disponible ?) then (Oui)
+
+            if (Salle disponible ?) then (Oui)
+
+                if (Capacité suffisante ?) then (Oui)
+
+                    :Affecter les ressources;
+                    :Enregistrer la séance;
+
+                else (Non)
+                    :Rechercher une autre salle;
+                endif
+
+            else (Non)
+                :Rechercher une autre salle;
+            endif
+
+        else (Non)
+            :Rechercher un autre enseignant;
+        endif
+
+    else (Non)
+        :Rechercher un autre créneau;
+    endif
+
+endwhile (Non)
+
+:Afficher l'emploi du temps;
+
+stop
+
+@enduml

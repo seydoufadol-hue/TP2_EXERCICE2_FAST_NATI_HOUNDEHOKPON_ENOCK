@@ -1,0 +1,38 @@
+
+@startuml
+
+actor "Responsable pédagogique" as RP
+boundary "Interface" as I
+control "GestionSeance" as GS
+database "Base de données" as BD
+
+RP -> I : Demander programmation
+I -> RP : Afficher formulaire
+
+RP -> I : Saisir les informations
+I -> GS : programmerSeance(données)
+
+GS -> BD : Vérifier disponibilité enseignant
+BD --> GS : Résultat
+
+GS -> BD : Vérifier disponibilité salle
+BD --> GS : Résultat
+
+GS -> BD : Vérifier disponibilité groupe
+BD --> GS : Résultat
+
+alt Toutes les ressources sont disponibles
+
+    GS -> BD : Enregistrer la séance
+    BD --> GS : Confirmation
+    GS --> I : Programmation réussie
+    I --> RP : Afficher confirmation
+
+else Conflit détecté
+
+    GS --> I : Signaler le conflit
+    I --> RP : Afficher le problème
+
+end
+
+@enduml

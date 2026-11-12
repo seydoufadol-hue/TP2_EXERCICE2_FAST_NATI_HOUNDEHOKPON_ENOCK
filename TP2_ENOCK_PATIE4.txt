@@ -1,0 +1,45 @@
+
+@startuml
+
+start
+
+:Consulter le calendrier des TD;
+
+:Identifier la séance programmée;
+
+:Se rendre dans la salle;
+
+:Vérifier la disponibilité de la salle;
+
+if (Salle disponible ?) then (Oui)
+
+    :Accueillir les étudiants;
+
+    :Vérifier la liste des étudiants;
+
+    :Faire l'appel;
+
+    while (Tous les étudiants vérifiés ?) is (Non)
+        :Vérifier l'étudiant suivant;
+        :Enregistrer son statut;
+    endwhile (Oui)
+
+    :Enregistrer les présences;
+
+    :Effectuer le TD;
+
+    :Terminer la séance;
+
+    :Produire le bilan de présence;
+
+else (Non)
+
+    :Signaler le problème;
+    :Informer le responsable;
+    :Reprogrammer la séance;
+
+endif
+
+stop
+
+@enduml
